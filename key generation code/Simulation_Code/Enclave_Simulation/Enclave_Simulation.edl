@@ -1,0 +1,13 @@
+enclave {
+    trusted {
+        /* define ECALLs here. */
+
+		public unsigned int generate_key(size_t key_size_in_bytes);
+
+    };
+
+    untrusted {
+        /* define OCALLs here. */
+    
+    };
+};
