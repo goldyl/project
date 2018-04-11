@@ -1,0 +1,2 @@
+﻿  serial.cpp
+LINK : fatal error LNK1104: cannot open file 'C:\Users\ToshibaPc\Documents\Visual Studio 2015\Projects\serial\Release\serial.exe'

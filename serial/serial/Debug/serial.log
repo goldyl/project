@@ -1,0 +1,8 @@
+﻿  serial.cpp
+c:\users\toshibapc\documents\visual studio 2015\projects\serial\serial\serial.cpp(67): warning C4476: 'printf' : unknown type field character 'b' in format specifier
+c:\users\toshibapc\documents\visual studio 2015\projects\serial\serial\serial.cpp(67): warning C4474: 'printf' : too many arguments passed for format string
+  c:\users\toshibapc\documents\visual studio 2015\projects\serial\serial\serial.cpp(67): note: placeholders and their parameters expect 2 variadic arguments, but 3 were provided
+c:\users\toshibapc\documents\visual studio 2015\projects\serial\serial\serial.cpp(49): warning C4101: 'number': unreferenced local variable
+c:\users\toshibapc\documents\visual studio 2015\projects\serial\serial\serial.cpp(39): warning C4172: returning address of local variable or temporary: binary_string
+  serial.vcxproj -> C:\Users\ToshibaPc\documents\visual studio 2015\Projects\serial\Debug\serial.exe
+  serial.vcxproj -> C:\Users\ToshibaPc\documents\visual studio 2015\Projects\serial\Debug\serial.pdb (Full PDB)
