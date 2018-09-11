@@ -19,8 +19,14 @@
 
 typedef struct ms_generate_key_t {
 	unsigned int ms_retval;
-	size_t ms_key_size_in_bytes;
+	int ms_key_size_in_bytes;
 } ms_generate_key_t;
+
+typedef struct ms_transmit_key_t {
+	unsigned char* ms_keys;
+	int ms_key_size_in_bytes;
+	int ms_char_size;
+} ms_transmit_key_t;
 
 #ifdef _MSC_VER
 #pragma warning(push)
@@ -53,10 +59,53 @@ SGX_EXTERNC const struct {
 
 SGX_EXTERNC const struct {
 	size_t nr_ocall;
+	uint8_t entry_table[1][1];
 } g_dyn_entry_table = {
-	0,
+	1,
+	{
+		{0, },
+	}
 };
 
+
+sgx_status_t SGX_CDECL transmit_key(unsigned char* keys, int key_size_in_bytes, int char_size)
+{
+	sgx_status_t status = SGX_SUCCESS;
+	size_t _len_keys = key_size_in_bytes * char_size;
+
+	ms_transmit_key_t* ms = NULL;
+	size_t ocalloc_size = sizeof(ms_transmit_key_t);
+	void *__tmp = NULL;
+
+	ocalloc_size += (keys != NULL && sgx_is_within_enclave(keys, _len_keys)) ? _len_keys : 0;
+
+	__tmp = sgx_ocalloc(ocalloc_size);
+	if (__tmp == NULL) {
+		sgx_ocfree();
+		return SGX_ERROR_UNEXPECTED;
+	}
+	ms = (ms_transmit_key_t*)__tmp;
+	__tmp = (void *)((size_t)__tmp + sizeof(ms_transmit_key_t));
+
+	if (keys != NULL && sgx_is_within_enclave(keys, _len_keys)) {
+		ms->ms_keys = (unsigned char*)__tmp;
+		__tmp = (void *)((size_t)__tmp + _len_keys);
+		memcpy(ms->ms_keys, keys, _len_keys);
+	} else if (keys == NULL) {
+		ms->ms_keys = NULL;
+	} else {
+		sgx_ocfree();
+		return SGX_ERROR_INVALID_PARAMETER;
+	}
+	
+	ms->ms_key_size_in_bytes = key_size_in_bytes;
+	ms->ms_char_size = char_size;
+	status = sgx_ocall(0, ms);
+
+
+	sgx_ocfree();
+	return status;
+}
 
 #ifdef _MSC_VER
 #pragma warning(pop)

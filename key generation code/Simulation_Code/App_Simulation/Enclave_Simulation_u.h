@@ -14,8 +14,9 @@
 extern "C" {
 #endif
 
+void SGX_UBRIDGE(SGX_NOCONVENTION, transmit_key, (unsigned char* keys, int key_size_in_bytes, int char_size));
 
-sgx_status_t generate_key(sgx_enclave_id_t eid, unsigned int* retval, size_t key_size_in_bytes);
+sgx_status_t generate_key(sgx_enclave_id_t eid, unsigned int* retval, int key_size_in_bytes);
 
 #ifdef __cplusplus
 }

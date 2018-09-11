@@ -29,6 +29,9 @@
     <ClInclude Include="Enclave_Simulation_t.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="stdlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Enclave_Simulation_private.pem">

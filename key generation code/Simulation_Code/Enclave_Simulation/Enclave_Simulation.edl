@@ -1,13 +1,11 @@
 enclave {
     trusted {
         /* define ECALLs here. */
-
-		public unsigned int generate_key(size_t key_size_in_bytes);
-
+		public unsigned int generate_key(int key_size_in_bytes);
     };
 
     untrusted {
         /* define OCALLs here. */
-    
+        void transmit_key([in, size=char_size, count=key_size_in_bytes] unsigned char* keys, int key_size_in_bytes, int char_size);
     };
 };

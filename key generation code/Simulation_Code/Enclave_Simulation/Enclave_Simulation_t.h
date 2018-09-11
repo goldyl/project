@@ -14,8 +14,9 @@ extern "C" {
 #endif
 
 
-unsigned int generate_key(size_t key_size_in_bytes);
+unsigned int generate_key(int key_size_in_bytes);
 
+sgx_status_t SGX_CDECL transmit_key(unsigned char* keys, int key_size_in_bytes, int char_size);
 
 #ifdef __cplusplus
 }
